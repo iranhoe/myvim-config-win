@@ -3,11 +3,12 @@ filetype plugin indent on
 
 let mapleader = ','
 set number
-set tabstop=4		" Number of spaces tab is counted for.
-set shiftwidth=4	" Number of spaces to use to autoindent
+set tabstop=2		" Number of spaces tab is counted for.
+set shiftwidth=2	" Number of spaces to use to autoindent
 set path+=.,,src/**
-set foldmethod=indent
+set foldmethod=marker
 set clipboard=unnamed " Copy into system (*) register.
+set wrap!
 "set wildmenu				   " Enalbe enhanced tab autocomplete
 " set wildmode=list:longest,full " Complete till longes string
 
@@ -17,9 +18,6 @@ set clipboard=unnamed " Copy into system (*) register.
 " colorscheme murphy " Change a colorscheme
 
 " silent! helptags ALL " Load help files for all plugins
-
-
-
 
 " ------------------------------------------------------------------------
 " functions
@@ -51,10 +49,18 @@ endfunction
 " Pluging mappings
 noremap <leader>n :NERDTreeToggle<cr>
 inoremap <tab> <c-r>=Smart_TabComplete()<CR>
+noremap <C-f> :GFiles --cached --others --exclude-standard<cr>
+noremap <leader><C-f> :Files<cr>
 
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:OmniSharp_selector_ui = 'fzf'
 let g:OmniSharp_selector_findusages = 'fzf'
+
+" Save using <Ctrl-u> (u stands for update)
+noremap <C-u> :w<cr> 
+
+" Terminal like VS Code
+noremap <c-t> :term<CR>
 
 " Escape alternative 
 
@@ -76,10 +82,11 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
+" Buffer
+noremap gn :bn<cr>
+noremap gp :bp<cr>
 
-" ------------------------------------------
-"  C# Code Folding
-" ------------------------------------------
+" => C# Code Folding ----------------------------------------------{{{1
 
 au FileType cs set omnifunc=syntaxcomplete#Complete
 au FileType cs set foldmethod=marker
@@ -87,9 +94,14 @@ au FileType cs set foldmarker={,}
 au FileType cs set foldtext=subtitute(getline(v:foldstart),'{.*','{...}',)
 au FileType cs set foldlevelstart=2
 
-" --------------------------------------------------------------------------
-"  PLUGINS
-" --------------------------------------------------------------------------
+" }}}
+
+" => Closing Tag Config ------------------------------------------{{{2
+let g:closetag_filenames = '*.html'
+
+" }}}
+
+" => PLUGINS -----------------------------------------------------{{{3
 call plug#begin(stdpath('data') . '/plugged')
 
 " On-demand loading
@@ -99,10 +111,18 @@ call plug#begin(stdpath('data') . '/plugged')
    Plug 'https://github.com/tpope/vim-vinegar.git'
    Plug 'tpope/vim-fugitive'
    Plug 'chrisbra/Colorizer'
+	 Plug 'tpope/vim-commentary'
 "   Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
+	 Plug 'alvan/vim-closetag'
    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
    Plug 'junegunn/fzf.vim'
    Plug 'OmniSharp/omnisharp-vim'
-
+   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+   Plug 'airblade/vim-rooter' 
+   Plug 'w0rp/ale'
+   Plug 'vim-airline/vim-airline'
+" Not sure if I need to use YouCompleteMe but looks like a good one
+" So I will keep it in mine.
 call plug#end()
 
+" }}}
