@@ -111,7 +111,7 @@ call plug#begin(stdpath('data') . '/plugged')
 	 Plug 'tpope/vim-commentary'
 "   Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
    Plug 'jelera/vim-javascript-syntax'
-   " Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 	 Plug 'alvan/vim-closetag'
    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
    Plug 'junegunn/fzf.vim'
@@ -120,9 +120,9 @@ call plug#begin(stdpath('data') . '/plugged')
    Plug 'airblade/vim-rooter' 
    Plug 'w0rp/ale'
    Plug 'vim-airline/vim-airline'
-	 Plug 'navarasu/onedark.nvim'
-	 Plug 'tomasiser/vim-code-dark'
-	 Plug	'dunstontc/vim-vscode-theme'
+	 " Plug 'navarasu/onedark.nvim'
+	 " Plug 'tomasiser/vim-code-dark'
+	 Plug	'iranhoe/vim-vscode-theme-plus'
 call plug#end()
 " So I will keep it in mine.
 " Not sure if I need to use YouCompleteMe but looks like a good one
@@ -132,12 +132,12 @@ call plug#end()
 
 " => THEME ---------------------------------------------------{{{4
 
-set t_Co =256
-set t_ut=
+" set t_Co =256
+" set t_ut=
 " colorscheme murphy " Change a colorscheme
 " colorscheme dark
 " colorscheme onedark
-colorscheme dark_plus
+" colorscheme dark_plus
 " colorscheme codedark
 " let g:airline_theme = 'codedark'
 
